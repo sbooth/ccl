@@ -4,15 +4,35 @@
 \section section_introduction Introduction
 
 ccl is the <strong>C</strong>ustomizable
-<strong>C</strong>onfiguration <strong>L</strong>ibrary
+<strong>C</strong>onfiguration <strong>L</strong>ibrary, a collection
+of functions for application programmers wishing to interface with
+user-editable configuration files containing key/value pairs.
 
-ccl is designed to be simple and portable; it has a small interface of
-only five functions and is written in standard C.
+ccl is customizable because it allows the comment, key/value, and
+string literal delimiters to be programatically specified at runtime.
+
+ccl is designed to be simple and portable; it has a small interface
+consisting of five functions and is written in ANSI/ISO C.  ccl uses
+avl's implemenation of binary search trees for backend storage.
+
+\section section_download Download
+
+The current version of ccl is xxx, 1 Jan 20xx.
+
+ccl is available via <a href="http://www.">http</a> and <a
+href="ftp://www.">ftp</a>.
+
+\section section_documentation Documentation
+
+ccl is documented using <a href="http://www.doxygen.org">doxygen</a>.  
+
+You can browse the library's contents by using the navigation bar at
+the top of this page.  A good starting point is the \ref globals page.
 
 \section section_example Example
 
-An example is the best way to understand how ccl works.  A sample
-configuration file \c example.conf might contain: 
+An example is the best way to understand how ccl works.  A
+configuration file named \c example.conf might contain:
 
 \verbatim## Sample configuration file 
 Desktop-Picture = /usr/images/earth.jpg 
@@ -51,6 +71,19 @@ When compiled, the snippet above produces the output
 (Position,Centered)
 (Background Color,Black)
 \endverbatim
+
+\section section_bugs Reporting Bugs
+
+If you think you have found a bug in ccl, then you should send as
+complete a report as possible.  Ideally, you should include the text
+you get by running \c config.guess and the text you see when you run
+\c configure.
+
+If you think you have tracked down the source of the bug, please
+also send a patch made with diff -u5 which fixes the problem.
+
+Please send bug reports, questions, comments and suggestions
+to <a href="mailto:sfboothATearthlink.net">Stephen F. Booth</a>.
 
 \section section_license License
 
