@@ -1,5 +1,5 @@
 /*
- *  $Id: ccl.h,v 1.1.1.1 2004-04-10 13:35:03 sbooth Exp $
+ *  $Id: ccl.h,v 1.2 2004-04-14 06:58:34 sbooth Exp $
  *
  *  Copyright (C) 2004 Stephen F. Booth
  *
@@ -21,8 +21,7 @@
 #ifndef _LIBCONFIG_H_
 #define _LIBCONFIG_H_
 
-/* Maximum length of a line in the configuration file */
-#define CONFIG_MAXLEN 128
+#include "config.h"
 
 /** A key-value linked-list entry */
 struct config_pair_t
@@ -47,6 +46,7 @@ struct config_t
   /** The head of the linked list */
   struct config_pair_t *head;
 
+  /* Iterator functionality */
   struct config_pair_t *iter;
   struct config_pair_t *iter_prev;
 };
@@ -62,14 +62,19 @@ int
 config_parse(struct config_t *data, 
 	     const char *path);
 
-void config_release(struct config_t *data);
+void 
+config_release(struct config_t *data);
 
 
-const char* config_get(const struct config_t *data, 
-		       const char *key);
+const char* 
+config_get(const struct config_t *data, 
+	   const char *key);
 
-const struct config_pair_t* config_iterate(struct config_t *data);
-void config_iterate_reset(struct config_t *data);
+const struct config_pair_t* 
+config_iterate(struct config_t *data);
+
+void 
+config_iterate_reset(struct config_t *data);
 
 
 #endif /* ! _LIBCONFIG_H_ */
