@@ -1,11 +1,14 @@
 /* -*-html-*- */
 /*! \page index ccl - Customizable Configuration Library
 
+<div class="qindex">
+The current version of ccl is $(VERSION), released $(DATE)
+</div>
+
 \section section_introduction Introduction
 
-ccl is the <strong>c</strong>ustomizable
-<strong>c</strong>onfiguration <strong>l</strong>ibrary, a collection
-of functions for application programmers wishing to interface with
+ccl is the customizable configuration library, a collection of
+functions for application programmers wishing to interface with
 user-editable configuration files containing key/value pairs.
 
 ccl is customizable because it allows the comment, key/value, and
@@ -17,17 +20,16 @@ avl's implemenation of binary search trees for backend storage.
 
 \section section_download Download
 
-The current version of ccl is xxx, 1 Jan 20xx.
-
-ccl is available via <a href="http://www.">http</a> and <a
-href="ftp://www.">ftp</a>.
+ccl is available at <a
+href="http://home.earthlink.net/~sfbooth/files/">http://home.earthlink.net/~sfbooth/files/</a>.
 
 \section section_documentation Documentation
 
 ccl is documented using <a href="http://www.doxygen.org">doxygen</a>.  
 
 You can browse the library's contents by using the navigation bar at
-the top of this page.  A good starting point is the \ref globals page.
+the top of this page.  A good starting point is the <a
+href="globals.html">globals</a> page.
 
 \section section_example Example
 
@@ -44,7 +46,9 @@ The following  code demonstrates how to parse and access this file
 using ccl:
 
 \code
-struct ccl_t config;
+#include "ccl/ccl.h"
+
+struct ccl_t            config;
 const struct ccl_pair_t *iter;
 
 /* Set configuration file details */
@@ -56,7 +60,6 @@ config.str_char = '"';
 ccl_parse(&config, "example.conf");
 
 /* Iterate through all key/value pairs */
-ccl_reset(&config);
 while((iter = ccl_iterate(&config)) != 0) {
   printf("(%s,%s)\n", iter->key, iter->value);
 }
