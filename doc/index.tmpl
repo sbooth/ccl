@@ -1,9 +1,57 @@
 /* -*-html-*- */
 /*! \page index ccl - Customizable Configuration Library
 
-<h2>Introduction</h2>
+\section section_introduction Introduction
 
-<h2>ccl license</h2>
+ccl is the <strong>C</strong>ustomizable
+<strong>C</strong>onfiguration <strong>L</strong>ibrary
+
+ccl is designed to be simple and portable; it has a small interface of
+only five functions and is written in standard C.
+
+\section section_example Example
+
+An example is the best way to understand how ccl works.  A sample
+configuration file \c example.conf might contain: 
+
+\code 
+## Sample configuration file 
+Desktop-Picture = /usr/images/earth.jpg 
+Position = Centered 
+"Background Color" = Black 
+\endcode
+
+The following  code demonstrates how to parse and access this file
+using ccl:
+
+\code
+  struct ccl_t config;
+  const struct ccl_pair_t *iter;
+
+  config.comment_char = '#';
+  config.sep_char = '=';
+  config.str_char = '"';
+
+  ccl_parse(&config, "example.conf");
+
+  /* Iterate through all key/value pairs */
+  ccl_reset(&config);
+  while((iter = ccl_iterate(&config)) != 0) {
+    printf("(%s,%s)\n", iter->key, iter->value);
+  }
+
+  ccl_release(&config);
+\endcode
+
+When compiled, the snippet above produces the output
+
+\code
+(Desktop-Picture,/usr/images/earth.jpg)
+(Position,Centered)
+(Background Color,Black)
+\endcode
+
+\section section_license License
 
 Copyright &copy; 2004 <a href="mailto:sfboothATearthlink.net">Stephen
 F. Booth</a>.
