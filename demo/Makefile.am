@@ -1,8 +1,10 @@
-## $Id: Makefile.am,v 1.3 2004-04-15 17:54:49 sbooth Exp $
+## $Id: Makefile.am,v 1.4 2004-04-15 18:40:59 sbooth Exp $
 
 CLEANFILES = *~
 
 INCLUDES = -I$(top_srcdir)
+
+EXTRA_DIST = example.conf simple.conf
 
 noinst_PROGRAMS = tester
 
