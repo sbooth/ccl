@@ -393,8 +393,7 @@ WARN_LOGFILE           =
 # with spaces.
 
 INPUT                  = ../ccl/ccl.h \
-			index.tmpl \
-			license.tmpl
+			index.tmpl
 
 # If the value of the INPUT tag contains directories, you can use the 
 # FILE_PATTERNS tag to specify one or more wildcard pattern (like *.cpp 
