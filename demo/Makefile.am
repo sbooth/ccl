@@ -1,10 +1,10 @@
-## $Id: Makefile.am,v 1.2 2004-04-14 15:32:46 sbooth Exp $
+## $Id: Makefile.am,v 1.3 2004-04-15 17:54:49 sbooth Exp $
 
 CLEANFILES = *~
 
-noinst_PROGRAMS = tester
+INCLUDES = -I$(top_srcdir)
 
-INCLUDES = -I../src
+noinst_PROGRAMS = tester
 
 tester_SOURCES = tester.c
 tester_LDADD = ../ccl/libccl.la
