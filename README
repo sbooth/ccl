@@ -1,0 +1,23 @@
+README for ccl - customizable configuration library
+===================================================
+
+ccl is the customizable configuration library, a collection of
+functions for application programmers wishing to interface with
+user-editable configuration files containing key/value pairs.
+
+ccl is customizable because it allows the comment, key/value, and
+string literal delimiters to be programatically specified at runtime.
+
+ccl is designed to be simple and portable; it has a small interface
+consisting of five functions and is written in ANSI/ISO C. ccl uses
+avl's implemenation of binary search trees for backend storage.
+
+Please send bug reports, suggestions and comments to <sfbooth@earthlink.net>
+
+Visit ccl on the web at http://home.earthlink.net/~sfbooth/ccl/
+
+This package should contain the following directories:
+
+ccl/	The source code to the ccl library
+demo/	A ccl demonstration application and sample configuration files
+doc/	Complete documentation for ccl
