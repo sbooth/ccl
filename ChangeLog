@@ -1,3 +1,11 @@
+2004-06-13  Stephen F. Booth  <sfbooth@earthlink.net>
+
+	* configure.ac: Update version to 0.1.1
+
+2004-04-16  Stephen F. Booth  <sfbooth@earthlink.net>
+
+	* ccl/ccl_release.c: Fixed memory leak
+
 2004-04-15  Stephen F. Booth  <sfbooth@earthlink.net>
 
 	* Initial working version of library checked in
