@@ -14,42 +14,43 @@ only five functions and is written in standard C.
 An example is the best way to understand how ccl works.  A sample
 configuration file \c example.conf might contain: 
 
-\code 
-## Sample configuration file 
+\verbatim## Sample configuration file 
 Desktop-Picture = /usr/images/earth.jpg 
 Position = Centered 
 "Background Color" = Black 
-\endcode
+\endverbatim
 
 The following  code demonstrates how to parse and access this file
 using ccl:
 
 \code
-  struct ccl_t config;
-  const struct ccl_pair_t *iter;
+struct ccl_t config;
+const struct ccl_pair_t *iter;
 
-  config.comment_char = '#';
-  config.sep_char = '=';
-  config.str_char = '"';
+/* Set configuration file details */
+config.comment_char = '#';
+config.sep_char = '=';
+config.str_char = '"';
 
-  ccl_parse(&config, "example.conf");
+/* Parse the file */
+ccl_parse(&config, "example.conf");
 
-  /* Iterate through all key/value pairs */
-  ccl_reset(&config);
-  while((iter = ccl_iterate(&config)) != 0) {
-    printf("(%s,%s)\n", iter->key, iter->value);
-  }
+/* Iterate through all key/value pairs */
+ccl_reset(&config);
+while((iter = ccl_iterate(&config)) != 0) {
+  printf("(%s,%s)\n", iter->key, iter->value);
+}
 
-  ccl_release(&config);
+/* Clean up */
+ccl_release(&config);
 \endcode
 
 When compiled, the snippet above produces the output
 
-\code
-(Desktop-Picture,/usr/images/earth.jpg)
+\verbatim(Desktop-Picture,/usr/images/earth.jpg)
 (Position,Centered)
 (Background Color,Black)
-\endcode
+\endverbatim
 
 \section section_license License
 
