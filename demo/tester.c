@@ -1,5 +1,5 @@
 /*
- *  $Id: tester.c,v 1.3 2004-04-15 17:54:34 sbooth Exp $
+ *  $Id: tester.c,v 1.4 2004-04-15 18:30:59 sbooth Exp $
  *
  *  Copyright (C) 2004 Stephen F. Booth
  *
@@ -45,7 +45,6 @@ main(int argc,
 
   ccl_parse(&config, argv[1]);
 
-  ccl_reset(&config);
   while((iter = ccl_iterate(&config)) != 0) {
     printf("(%s,%s)\n", iter->key, iter->value);
   }
