@@ -1,5 +1,5 @@
 /*
- *  $Id: ccl.h,v 1.6 2004-04-15 17:48:34 sbooth Exp $
+ *  $Id: ccl.h,v 1.7 2004-04-15 17:53:26 sbooth Exp $
  *
  *  Copyright (C) 2004 Stephen F. Booth
  *
@@ -21,7 +21,9 @@
 #ifndef CCL_H
 #define CCL_H
 
-#include "config.h"
+#if HAVE_CONFIG_H
+#  include <config.h>
+#endif
 
 #include "ccl/bst.h"
 
