@@ -1,5 +1,5 @@
 /*
- *  $Id: ccl.h,v 1.4 2004-04-14 16:27:05 sbooth Exp $
+ *  $Id: ccl.h,v 1.5 2004-04-14 21:21:36 sbooth Exp $
  *
  *  Copyright (C) 2004 Stephen F. Booth
  *
@@ -18,14 +18,16 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef _CCL_H_
-#define _CCL_H_
+#ifndef CCL_H
+#define CCL_H
+
+#include "config.h"
+
+#include "bst.h"
 
 /*! \file ccl.h
  * \brief The ccl library interface
  */
-
-#include "config.h"
 
 /*! \brief A key/value pair found in a configuration file */
 struct ccl_pair_t
@@ -34,12 +36,6 @@ struct ccl_pair_t
   char *key;
   /*! \brief The value */
   char *value;
-
-
-  /* ========== Implementation details below, subject to change */
-
-  /* The next entry in the linked list */
-  struct ccl_pair_t *next;
 };
 
 /*!
@@ -63,12 +59,14 @@ struct ccl_t
 
   /* ========== Implementation details below, subject to change */
 
-  /* The head of the linked list */
-  struct ccl_pair_t *head;
+  /* The parsed file data, stored as a binary tree*/
+  struct bst_table *table;
 
-  /* Iterator functionality */
-  struct ccl_pair_t *iter;
-  struct ccl_pair_t *iter_prev;
+  /* The table traverser */
+  struct bst_traverser traverser;
+
+  /* Currently traversing? */
+  int iterating;
 };
 typedef struct ccl_t ccl_t;
 
@@ -137,6 +135,6 @@ void
 ccl_reset(struct ccl_t *data);
 
 
-#endif /* ! _CCL_H_ */
+#endif /* ! CCL_H */
 
 

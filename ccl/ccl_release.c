@@ -1,5 +1,5 @@
 /*
- *  $Id: ccl_release.c,v 1.2 2004-04-14 15:31:57 sbooth Exp $
+ *  $Id: ccl_release.c,v 1.3 2004-04-14 21:21:36 sbooth Exp $
  *
  *  Copyright (C) 2004 Stephen F. Booth
  *
@@ -22,21 +22,20 @@
 
 #include "ccl.h"
 
+static void
+ccl_bst_item_func(void *bst_item,
+		  void *bst_param)
+{
+  struct ccl_pair_t *pair = (struct ccl_pair_t*) bst_item;
+  free(pair->key);
+  free(pair->value);
+}
+
 void
 ccl_release(struct ccl_t *data)
 {
-  struct ccl_pair_t *current, *prev;
-
   if(data == 0)
     return;
-  
-  current = data->head;
-  while(current != 0) {
-    free(current->key);
-    free(current->value);
 
-    prev = current;
-    current = current->next;
-    free(prev);
-  }
+  bst_destroy(data->table, ccl_bst_item_func);
 }

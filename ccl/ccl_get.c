@@ -1,5 +1,5 @@
 /*
- *  $Id: ccl_get.c,v 1.2 2004-04-14 15:31:57 sbooth Exp $
+ *  $Id: ccl_get.c,v 1.3 2004-04-14 21:21:36 sbooth Exp $
  *
  *  Copyright (C) 2004 Stephen F. Booth
  *
@@ -26,17 +26,15 @@ const char*
 ccl_get(const struct ccl_t *data, 
 	const char *key)
 {
-  const struct ccl_pair_t *current;
+  const struct ccl_pair_t *pair;
+  struct ccl_pair_t temp;
 
   if(data == 0 || key == 0)
     return 0;
-  
-  current = data->head;
-  while(current != 0) {
-    if(strcmp(current->key, key) == 0)
-      return current->value;
-    current = current->next;
-  }
 
-  return 0;
+  temp.key = key;
+
+  pair = (const struct ccl_pair_t*) bst_find(data->table, &temp);
+  
+  return pair == 0 ? 0 : pair->value;
 }

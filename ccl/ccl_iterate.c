@@ -1,5 +1,5 @@
 /*
- *  $Id: ccl_iterate.c,v 1.2 2004-04-14 15:31:57 sbooth Exp $
+ *  $Id: ccl_iterate.c,v 1.3 2004-04-14 21:21:36 sbooth Exp $
  *
  *  Copyright (C) 2004 Stephen F. Booth
  *
@@ -23,19 +23,18 @@
 const struct ccl_pair_t*
 ccl_iterate(struct ccl_t *data)
 {
-  struct ccl_pair_t *current;
+  struct ccl_pair_t *pair;
 
   if(data == 0)
     return 0;
 
-  if(data->iter == 0 && data->iter_prev == 0)
-    data->iter = data->head;
-  else if(data->iter == 0)
-    return 0;
+  if(data->iterating) {
+    pair = bst_t_next(&data->traverser);
+  }
   else {
-    data->iter_prev = data->iter;
-    data->iter = data->iter->next;
+    data->iterating = 1;
+    pair = bst_t_first(&data->traverser, data->table);
   }
 
-  return data->iter;
+  return pair;
 }

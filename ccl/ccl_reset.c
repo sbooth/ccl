@@ -1,5 +1,5 @@
 /*
- *  $Id: ccl_reset.c,v 1.2 2004-04-14 15:31:57 sbooth Exp $
+ *  $Id: ccl_reset.c,v 1.3 2004-04-14 21:21:36 sbooth Exp $
  *
  *  Copyright (C) 2004 Stephen F. Booth
  *
@@ -24,7 +24,6 @@ void
 ccl_reset(struct ccl_t *data)
 {
   if(data != 0) {
-    data->iter = 0;
-    data->iter_prev = 0;
+    data->iterating = 0;
   }
 }

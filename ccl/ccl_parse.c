@@ -1,5 +1,5 @@
 /*
- *  $Id: ccl_parse.c,v 1.3 2004-04-14 15:31:57 sbooth Exp $
+ *  $Id: ccl_parse.c,v 1.4 2004-04-14 21:21:36 sbooth Exp $
  *
  *  Copyright (C) 2004 Stephen F. Booth
  *
@@ -37,6 +37,17 @@ enum {
   CCL_HANDLE_SEP
 };
 
+static int
+ccl_bst_comparison_func(const void *bst_a,
+			const void *bst_b,
+			void *bst_param)
+{
+  const struct ccl_pair_t *a = (const struct ccl_pair_t*) bst_a;
+  const struct ccl_pair_t *b = (const struct ccl_pair_t*) bst_b;
+
+  return strcmp(a->key, b->key);
+}
+
 int
 ccl_parse(struct ccl_t *data, 
 	  const char *path)
@@ -46,20 +57,22 @@ ccl_parse(struct ccl_t *data,
   char 			*token, *t, *tok_limit;
   int 			result, state, got_tok, tok_cap;
   size_t 		count, line;
-  struct ccl_pair_t 	*pair, *current;
+  struct ccl_pair_t 	*pair;
 
 
   if(data == 0 || path == 0)
     return -1;
   
   /* Setup */
-  data->head = 0;
-  data->iter = 0;
-  data->iter_prev = 0;
+  data->table = bst_create(ccl_bst_comparison_func, 0, 0);
+  if(data->table == 0) {
+    return ENOMEM;    
+  }
+  bst_t_init(&data->traverser, data->table);
+  data->iterating = 0;
   result = 0;
   line = 1;
   pair = 0;
-  current = 0;
 
   /* Open file */
   f = fopen(path, "r");
@@ -236,15 +249,15 @@ ccl_parse(struct ccl_t *data,
 	/* ==================== Process separator characters */
       case CCL_HANDLE_SEP:
 	if(got_tok == 0) {
+	  pair = 0;
 	  fprintf(stderr, PACKAGE": Missing key (%s:%i)\n", path, line);
 	}
 	else if(ccl_get(data, token) != 0) {
+	  pair = 0;
 	  fprintf(stderr, PACKAGE": Ignoring duplicate key '%s' (%s:%i)\n", 
 		  token, path, line);
 	}
 	else {
-	  //fprintf(stderr, "sep: token = %s\n", token);
-
 	  pair = (struct ccl_pair_t*) malloc(sizeof(struct ccl_pair_t));
 	  if(pair == 0) {
 	    result = ENOMEM;
@@ -253,7 +266,6 @@ ccl_parse(struct ccl_t *data,
 
 	  pair->key = strdup(token);
 	  pair->value = 0;
-	  pair->next = 0;
 	  if(pair->key == 0) {
 	    result = ENOMEM;
 	    goto cleanup;
@@ -266,28 +278,29 @@ ccl_parse(struct ccl_t *data,
 
 	/* ==================== Process newlines */
       case CCL_HANDLE_NEWLINE:
-	if(got_tok == 1 && pair != 0) {
-	  //fprintf(stderr, "newline: token = %s\n", token);
-
-	  pair->value = strdup(token);
+	if(pair != 0) {
+	  /* Some type of token was parsed */
+	  if(got_tok == 1) {
+	    pair->value = strdup(token);
+	  }
+	  else {
+	    /* In this case we read a key but no value */
+	    pair->value = strdup("");
+	  }
+	  
 	  if(pair->value == 0) {
 	    result = ENOMEM;
 	    goto cleanup;
 	  }
 
-	  if(data->head == 0) {
-	    data->head = pair;
+	  if(bst_probe(data->table, pair) == 0) {
+	    result = ENOMEM;
+	    goto cleanup;
 	  }
-
-	  if(current != 0) {
-	    current->next = pair;
-	  }
-
-	  current = pair;
-	  pair = 0;
 	}
 
 	got_tok = 0;
+	pair = 0;
 	state = CCL_PARSE_INITIAL;
 	++line;
 	++p;
