@@ -10,7 +10,7 @@ string literal delimiters to be programatically specified at runtime.
 
 ccl is designed to be simple and portable; it has a small interface
 consisting of five functions and is written in ANSI/ISO C. ccl uses
-avl's implemenation of binary search trees for backend storage.
+avl's implementation of binary search trees for backend storage.
 
 Please send bug reports, suggestions and comments to <sfbooth@earthlink.net>
 
