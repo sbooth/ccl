@@ -1,4 +1,4 @@
-## $Id: Makefile.am,v 1.1 2004-04-14 15:36:39 sbooth Exp $
+## $Id: Makefile.am,v 1.2 2004-04-14 16:26:55 sbooth Exp $
 
 CLEANFILES = *~
 
@@ -6,7 +6,7 @@ DOXYFILE = Doxyfile
 
 docdir = $(prefix)/doc/$(PACKAGE)-$(VERSION)
 
-TEMPLATES = index.tmpl license.tmpl
+TEMPLATES = index.tmpl
 
 EXTRA_DIST = html
 
