@@ -1,5 +1,5 @@
 /*
- *  $Id: ccl_get.c,v 1.1.1.1 2004-04-10 13:35:03 sbooth Exp $
+ *  $Id: ccl_get.c,v 1.2 2004-04-14 15:31:57 sbooth Exp $
  *
  *  Copyright (C) 2004 Stephen F. Booth
  *
@@ -20,13 +20,13 @@
 
 #include <string.h>
 
-#include "libconfig.h"
+#include "ccl.h"
 
 const char* 
-config_get(const struct config_t *data, 
-	   const char *key)
+ccl_get(const struct ccl_t *data, 
+	const char *key)
 {
-  const struct config_pair_t *current;
+  const struct ccl_pair_t *current;
 
   if(data == 0 || key == 0)
     return 0;

@@ -1,5 +1,5 @@
 /*
- *  $Id: ccl_reset.c,v 1.1.1.1 2004-04-10 13:35:03 sbooth Exp $
+ *  $Id: ccl_reset.c,v 1.2 2004-04-14 15:31:57 sbooth Exp $
  *
  *  Copyright (C) 2004 Stephen F. Booth
  *
@@ -18,10 +18,10 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include "libconfig.h"
+#include "ccl.h"
 
 void
-config_iterate_reset(struct config_t *data)
+ccl_reset(struct ccl_t *data)
 {
   if(data != 0) {
     data->iter = 0;

@@ -1,5 +1,5 @@
 /*
- *  $Id: ccl_iterate.c,v 1.1.1.1 2004-04-10 13:35:03 sbooth Exp $
+ *  $Id: ccl_iterate.c,v 1.2 2004-04-14 15:31:57 sbooth Exp $
  *
  *  Copyright (C) 2004 Stephen F. Booth
  *
@@ -18,12 +18,12 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include "libconfig.h"
+#include "ccl.h"
 
-const struct config_pair_t*
-config_iterate(struct config_t *data)
+const struct ccl_pair_t*
+ccl_iterate(struct ccl_t *data)
 {
-  struct config_pair_t *current;
+  struct ccl_pair_t *current;
 
   if(data == 0)
     return 0;

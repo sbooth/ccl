@@ -1,5 +1,5 @@
 /*
- *  $Id: ccl_release.c,v 1.1.1.1 2004-04-10 13:35:03 sbooth Exp $
+ *  $Id: ccl_release.c,v 1.2 2004-04-14 15:31:57 sbooth Exp $
  *
  *  Copyright (C) 2004 Stephen F. Booth
  *
@@ -20,12 +20,12 @@
 
 #include <stdlib.h>
 
-#include "libconfig.h"
+#include "ccl.h"
 
 void
-config_release(struct config_t *data)
+ccl_release(struct ccl_t *data)
 {
-  struct config_pair_t *current, *prev;
+  struct ccl_pair_t *current, *prev;
 
   if(data == 0)
     return;

@@ -1,5 +1,5 @@
 /*
- *  $Id: ccl.h,v 1.2 2004-04-14 06:58:34 sbooth Exp $
+ *  $Id: ccl.h,v 1.3 2004-04-14 15:31:57 sbooth Exp $
  *
  *  Copyright (C) 2004 Stephen F. Booth
  *
@@ -18,13 +18,13 @@
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef _LIBCONFIG_H_
-#define _LIBCONFIG_H_
+#ifndef _CCL_H_
+#define _CCL_H_
 
 #include "config.h"
 
 /** A key-value linked-list entry */
-struct config_pair_t
+struct ccl_pair_t
 {
   /** The key */
   char *key;
@@ -32,51 +32,53 @@ struct config_pair_t
   char *value;
 
   /** The next entry in the linked list */
-  struct config_pair_t *next;
+  struct ccl_pair_t *next;
 };
 
 /** The main data structure */
-struct config_t
+struct ccl_t
 {
   /** The character that indicates the start of a comment */
   char comment_char;
   /** The character that separates keys from values */
   char sep_char;
+  /** The character that delineates string literals */
+  char str_char;
 
   /** The head of the linked list */
-  struct config_pair_t *head;
+  struct ccl_pair_t *head;
 
   /* Iterator functionality */
-  struct config_pair_t *iter;
-  struct config_pair_t *iter_prev;
+  struct ccl_pair_t *iter;
+  struct ccl_pair_t *iter_prev;
 };
-typedef struct config_t config_t;
+typedef struct ccl_t ccl_t;
 
 /**
  * Parse a configuration file.
- * @param data The \c config_t in which to store the parsed data
+ * @param data The \c ccl_t in which to store the parsed data
  * @param path The file to parse
  * @return 0 if successful
  */
 int
-config_parse(struct config_t *data, 
-	     const char *path);
+ccl_parse(struct ccl_t *data, 
+	  const char *path);
 
 void 
-config_release(struct config_t *data);
+ccl_release(struct ccl_t *data);
 
 
 const char* 
-config_get(const struct config_t *data, 
-	   const char *key);
+ccl_get(const struct ccl_t *data, 
+	const char *key);
 
-const struct config_pair_t* 
-config_iterate(struct config_t *data);
+const struct ccl_pair_t* 
+ccl_iterate(struct ccl_t *data);
 
 void 
-config_iterate_reset(struct config_t *data);
+ccl_reset(struct ccl_t *data);
 
 
-#endif /* ! _LIBCONFIG_H_ */
+#endif /* ! _CCL_H_ */
 
 
