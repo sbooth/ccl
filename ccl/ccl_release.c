@@ -1,5 +1,5 @@
 /*
- *  $Id: ccl_release.c,v 1.4 2004-04-15 17:48:34 sbooth Exp $
+ *  $Id: ccl_release.c,v 1.5 2004-04-16 23:58:08 sbooth Exp $
  *
  *  Copyright (C) 2004 Stephen F. Booth
  *
@@ -29,6 +29,7 @@ ccl_bst_item_func(void *bst_item,
   struct ccl_pair_t *pair = (struct ccl_pair_t*) bst_item;
   free(pair->key);
   free(pair->value);
+  free(pair);
 }
 
 void
