@@ -1,29 +1,30 @@
 /*
- *  $Id: ccl_parse.c,v 1.4 2004-04-14 21:21:36 sbooth Exp $
+ *  $Id: ccl_parse.c,v 1.5 2004-04-15 17:48:34 sbooth Exp $
  *
  *  Copyright (C) 2004 Stephen F. Booth
  *
- *  This library is free software; you can redistribute it and/or
- *  modify it under the terms of the GNU Lesser General Public
- *  License as published by the Free Software Foundation; either
- *  version 2.1 of the License, or (at your option) any later version.
+ *  This program is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
  *
- *  This library is distributed in the hope that it will be useful,
+ *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- *  Lesser General Public License for more details.
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU Lesser General Public
- *  License along with this library; if not, write to the Free Software
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <errno.h>
+#include <stdlib.h> 	/* malloc, free */
+#include <stdio.h>	/* fopen, fread, fclose */
+#include <string.h>	/* strcmp, strdup */
+#include <ctype.h>	/* isspace */
+#include <errno.h>	/* ENOMEM, EINVAL, ENOENT */
 
-#include "ccl.h"
+#include "ccl/ccl.h"
 
 #define CCL_BUFSIZE 1024
 #define CCL_TOKSIZE 32
@@ -60,28 +61,32 @@ ccl_parse(struct ccl_t *data,
   struct ccl_pair_t 	*pair;
 
 
+  /* Validate arguments */
   if(data == 0 || path == 0)
-    return -1;
+    return EINVAL;
   
-  /* Setup */
+  /* Setup local variables */
+  result = 0;
+  pair = 0;
+  line = 1;
+
+  /* Setup data struct */
   data->table = bst_create(ccl_bst_comparison_func, 0, 0);
   if(data->table == 0) {
     return ENOMEM;    
+    goto cleanup;
   }
   bst_t_init(&data->traverser, data->table);
   data->iterating = 0;
-  result = 0;
-  line = 1;
-  pair = 0;
 
   /* Open file */
   f = fopen(path, "r");
   if(f == 0) {
     fprintf(stderr, PACKAGE": Unable to open '%s'\n", path);
-    return -1;
+    return ENOENT;
   }
 
-  /* Initialize buffer */
+  /* Initialize file and token buffers */
   buf = (char*) malloc(sizeof(char) * CCL_BUFSIZE);
   token = (char*) malloc(sizeof(char) * CCL_TOKSIZE);
   if(buf == 0 || token == 0) {
@@ -102,7 +107,7 @@ ccl_parse(struct ccl_t *data,
 
     /* Parse the input - manually increment p since not all
        transitions should automatically consume a character */
-    for(p = buf; p < buf + count; ) {
+    for(p = buf; p < buf + count; /* ++p */ ) {
 
       switch(state) {
 
@@ -125,7 +130,6 @@ ccl_parse(struct ccl_t *data,
 	  ++p;
 	}
 	else if(isspace(*p)) {
-	  /* Skip ws */
 	  ++p;
 	}
 	else {
@@ -310,6 +314,11 @@ ccl_parse(struct ccl_t *data,
   } while(feof(f) == 0);
 
  cleanup:
+  if(pair != 0) {
+    free(pair->key);
+    free(pair->value);
+    free(pair);
+  }
   free(buf);
   free(token);
   fclose(f);
