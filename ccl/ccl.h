@@ -1,7 +1,7 @@
 /*
- *  $Id: ccl.h,v 1.7 2004-04-15 17:53:26 sbooth Exp $
+ *  $Id: ccl.h,v 1.8 2005-08-10 09:07:05 sbooth Exp $
  *
- *  Copyright (C) 2004 Stephen F. Booth
+ *  Copyright (C) 2004 - 2005 Stephen F. Booth
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,6 +26,10 @@
 #endif
 
 #include "ccl/bst.h"
+
+#ifdef __cplusplus
+  extern "C" {
+#endif
 
 /*! \file ccl.h
  * \brief The ccl library interface
@@ -136,6 +140,9 @@ ccl_iterate(struct ccl_t *data);
 void 
 ccl_reset(struct ccl_t *data);
 
+#ifdef __cplusplus
+  }
+#endif
 
 #endif /* ! CCL_H */
 
