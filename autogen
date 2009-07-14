@@ -9,7 +9,7 @@ echo "== Running autoheader =="
 autoheader
 
 echo "== Running libtoolize =="
-libtoolize
+glibtoolize
 
 echo "== Running automake =="
 automake --add-missing
