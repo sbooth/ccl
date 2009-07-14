@@ -12,9 +12,9 @@ ccl is designed to be simple and portable; it has a small interface
 consisting of five functions and is written in ANSI/ISO C. ccl uses
 avl's implementation of binary search trees for backend storage.
 
-Please send bug reports, suggestions and comments to <sfbooth@earthlink.net>
+Please send bug reports, suggestions and comments to <me@sbooth.org>
 
-Visit ccl on the web at http://home.earthlink.net/~sfbooth/ccl/
+Visit ccl on the web at http://sbooth.org/ccl/
 
 This package should contain the following directories:
 
