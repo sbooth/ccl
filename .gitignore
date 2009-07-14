@@ -1,2 +1,28 @@
-## Ignore emacs temp files
+## emacs temp files
 *~
+
+## Generated documentation
+doc/html
+doc/latex
+
+## Object files
+*.o
+*.lo
+
+## Autoconf/automake/libtool
+m4/
+support/
+Makefile.in
+Makefile
+.libs/
+.deps/
+*.swp
+autom4te.cache/
+aclocal.m4
+config.h
+config.h.in
+config.log
+config.status
+configure
+libtool
+stamp-h1
