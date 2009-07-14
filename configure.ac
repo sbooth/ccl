@@ -1,14 +1,14 @@
 dnl -*- m4 -*-
-dnl $Id: configure.ac,v 1.3 2004-06-14 03:03:45 sbooth Exp $
 
 dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ(2.59)
 AC_INIT(ccl, 0.1.1)
 AC_CONFIG_SRCDIR(ccl/ccl.h)
+AC_CONFIG_MACRO_DIR([m4])
+AC_CONFIG_AUX_DIR(support)
 AM_INIT_AUTOMAKE
 AM_MAINTAINER_MODE
-AC_REVISION([$Revision: 1.3 $])
-AC_PREFIX_DEFAULT(/usr)
+AC_PREFIX_DEFAULT(/usr/local)
 
 dnl Checks for programs.
 AC_PROG_CC
