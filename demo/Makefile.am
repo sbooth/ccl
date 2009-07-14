@@ -1,5 +1,3 @@
-## $Id: Makefile.am,v 1.4 2004-04-15 18:40:59 sbooth Exp $
-
 CLEANFILES = *~
 
 INCLUDES = -I$(top_srcdir)
