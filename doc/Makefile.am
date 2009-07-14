@@ -1,5 +1,3 @@
-## $Id: Makefile.am,v 1.3 2004-04-15 18:36:09 sbooth Exp $
-
 CLEANFILES = *~
 
 DOXYFILE = Doxyfile
