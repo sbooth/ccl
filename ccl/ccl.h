@@ -1,7 +1,5 @@
 /*
- *  $Id: ccl.h,v 1.8 2005-08-10 09:07:05 sbooth Exp $
- *
- *  Copyright (C) 2004 - 2005 Stephen F. Booth
+ *  Copyright (C) 2004 - 2005 Stephen F. Booth <me@sbooth.org>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by

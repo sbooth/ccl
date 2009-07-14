@@ -1,7 +1,5 @@
 /*
- *  $Id: ccl_iterate.c,v 1.4 2004-04-15 17:48:34 sbooth Exp $
- *
- *  Copyright (C) 2004 Stephen F. Booth
+ *  Copyright (C) 2004 Stephen F. Booth <me@sbooth.org>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
