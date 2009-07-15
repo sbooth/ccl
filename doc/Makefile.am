@@ -15,7 +15,7 @@ if MAINTAINER_MODE
 ## to anybody else (taken from libtool/Makefile.am).
 ##
 doc: $(DOXYFILE) $(TEMPLATES) $(srcdir)/../ccl/ccl.h
-	DATE=`date '+%-d %b %Y'` VERSION=$(VERSION) $(DOXYGEN) $(DOXYFILE)
+	DATE=`date '+%d %b %Y'` VERSION=$(VERSION) $(DOXYGEN) $(DOXYFILE)
 else
 doc:
 	@if test ! -d html; then \
