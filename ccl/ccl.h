@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2004 - 2005 Stephen F. Booth <me@sbooth.org>
+ *  Copyright (C) 2004 - 2005, 2012 Stephen F. Booth <me@sbooth.org>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -137,6 +137,22 @@ ccl_iterate(struct ccl_t *data);
  */
 void 
 ccl_reset(struct ccl_t *data);
+
+  /*!
+   * \brief Set a value in a configuration file
+   *
+   * This function sets a value in \c data as though it were read from a configuration file.
+   * If not 0, the value returned no longer belongs to ccl and should be free'd, including
+   * the internal \c key and \c value pointers.
+   * \param data The ccl_t to which the key/value pair should be addded.
+   * \param key The key
+   * \param value The value
+   * \return The key/value pair that was replaced, or 0 if none.
+   */
+struct ccl_pair_t* 
+ccl_set(const struct ccl_t *data, 
+	const char *key,
+	const char *value);
 
 #ifdef __cplusplus
   }
