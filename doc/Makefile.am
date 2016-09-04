@@ -2,7 +2,7 @@ CLEANFILES = *~
 
 DOXYFILE = Doxyfile
 
-TEMPLATES = index.tmpl
+TEMPLATES = mainpage.dox
 
 EXTRA_DIST = html latex
 

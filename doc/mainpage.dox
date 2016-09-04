@@ -1,5 +1,5 @@
 /* -*-html-*- */
-/*! \page index ccl - Customizable Configuration Library
+/*! \mainpage ccl - Customizable Configuration Library
 
 <div class="qindex">
 The current version of ccl is $(VERSION), released $(DATE)
@@ -22,7 +22,7 @@ of binary search trees for backend storage.
 \section section_download Download
 
 ccl is available at <a
-href="http://sbooth.org/files/">http://sbooth.org/files/</a>.
+href="https://sbooth.org/files/">https://sbooth.org/files/</a>.
 
 \section section_documentation Documentation
 
