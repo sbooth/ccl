@@ -1,6 +1,6 @@
 CLEANFILES = *~
 
-INCLUDES = -I$(top_srcdir) -I$(top_builddir)
+AM_CPPFLAGS = -I$(top_srcdir) -I$(top_builddir)
 
 lib_LTLIBRARIES = libccl.la
 libccl_la_SOURCES = ccl_parse.c ccl_release.c ccl_get.c ccl_iterate.c	\

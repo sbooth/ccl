@@ -1,6 +1,6 @@
 CLEANFILES = *~
 
-INCLUDES = -I$(top_srcdir)
+AM_CPPFLAGS = -I$(top_srcdir)
 
 EXTRA_DIST = example.conf simple.conf
 
