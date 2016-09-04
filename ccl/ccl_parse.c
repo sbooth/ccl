@@ -171,7 +171,7 @@ ccl_parse(struct ccl_t *data,
 	  ++p;
 	}
 	else if(*p == '\n') {
-	  fprintf(stderr, PACKAGE": Unterminated string (%s:%i)\n",
+	  fprintf(stderr, PACKAGE": Unterminated string (%s:%zi)\n",
 		  path, line);
 	  
 	  state = CCL_HANDLE_NEWLINE;
@@ -252,11 +252,11 @@ ccl_parse(struct ccl_t *data,
       case CCL_HANDLE_SEP:
 	if(got_tok == 0) {
 	  pair = 0;
-	  fprintf(stderr, PACKAGE": Missing key (%s:%i)\n", path, line);
+	  fprintf(stderr, PACKAGE": Missing key (%s:%zi)\n", path, line);
 	}
 	else if(ccl_get(data, token) != 0) {
 	  pair = 0;
-	  fprintf(stderr, PACKAGE": Ignoring duplicate key '%s' (%s:%i)\n", 
+	  fprintf(stderr, PACKAGE": Ignoring duplicate key '%s' (%s:%zi)\n", 
 		  token, path, line);
 	}
 	else {
